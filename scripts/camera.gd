@@ -1,7 +1,11 @@
 extends Camera2D
 
 var target
+var swarm
 const deltaLerp = 0.01
+
+const minZoom = 0.5
+const zoomCoeff = 0.0005
 
 func _ready():
 	
@@ -9,6 +13,7 @@ func _ready():
 	drag_margin_h_enabled = false
 	drag_margin_v_enabled = false
 	
+	swarm = get_parent().get_node("Swarm")
 	var player = get_parent().get_node("Swarm").get_node("Marker")
 	
 	target = player
@@ -22,7 +27,17 @@ func _process(delta):
 	var targetPos = getTargetPos()
 	position = position.linear_interpolate(targetPos, deltaLerp)
 	
+	adjustZoom()
+	
 	align()
+	
+
+func adjustZoom():
+	
+	var antCount = swarm.get_children().size()
+	var zoomAmount = minZoom + (antCount * zoomCoeff)
+	zoom = Vector2(zoomAmount, zoomAmount)
+	
 	
 
 func getTargetPos():
