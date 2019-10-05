@@ -2,30 +2,34 @@ extends Area2D
 
 var swarm
 
-var speed = 200
-var rotSpeed = 50
+var speed = 1.5
+var rotSpeed = 0.07
 
-var velo = Vector2.ZERO
-var accel = Vector2.ZERO
+var rot = 0
 
 func _ready():
-	rotation += rand_range(-0.09, 0.09)
-	velo = transform.x * speed
+	speed = rand_range(0.5, 1)
+	rotSpeed = rand_range(0.04, 0.07)
 	
+	rot = rand_range(0, PI * 2)
 	swarm = get_parent().get_parent()
-	pass
 
 func _process(delta):
-	accel += seek()
-	velo += accel * delta
-	velo = velo.clamped(speed)
-	rotation = velo.angle()
-	position += velo * delta
-
-func seek():
-	var steer = Vector2.ZERO
-	if swarm:
-		var desired = (swarm.getTarget() - position).normalized() * speed
-		steer = (desired - velo).normalized() * rotSpeed
-
-	return steer
+	var desiredA = -atan2(swarm.getTarget().y - position.y, swarm.getTarget().x - position.x)
+	var theta = desiredA - rot
+	
+	if theta > PI:
+		rot += 2 * PI
+	elif theta < -PI:
+		rot -= 2 * PI
+	
+	var turnVelo = (desiredA - rot) * rotSpeed
+	rot += turnVelo
+	
+	var c = cos(rot)
+	var s = sin(rot)
+	
+	position.x += c * speed
+	position.y -= s * speed
+	
+	rotation = -rot + PI/2
