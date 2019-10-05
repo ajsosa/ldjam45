@@ -26,6 +26,8 @@ var spawn = 0
 var spawnTimer = 0
 var spawnRate = antCount * 2
 
+var anim
+
 func _ready():
 	battleCircle = $Sprite/BattleCircle/CollisionShape2D
 	battleCircle.get_parent().connect("area_entered", self, "enterBattle") 
@@ -36,6 +38,9 @@ func _ready():
 	area.connect("area_exited", self, "exit") 
 	
 	antObject = load("res://scenes/Objects/Ant.tscn")
+	
+	anim = $Sprite/AnimationPlayer
+	anim.play("enemy")
 
 func _process(delta):
 	dt = delta
@@ -67,6 +72,7 @@ func _process(delta):
 	if makeAnts:
 		if get_children().size() == 1:
 			owned = true
+			anim.play("owned")
 
 func addAnt():
 	var ant = antObject.instance()
