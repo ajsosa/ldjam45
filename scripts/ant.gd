@@ -35,7 +35,13 @@ func _process(delta):
 		#var turnVelo = (desiredA - rot) * rotSpeed * 0.1
 		#rot -= turnVelo
 	
-	var desiredA = -atan2(swarm.getTarget().y - position.y, swarm.getTarget().x - position.x)
+	var pos = swarm.getTarget()
+	
+	if not pos is Vector2:
+		if pos.get_name() == "Marker":
+			pos = swarm.to_local(pos.global_position)
+	
+	var desiredA = -atan2(pos.y - position.y, pos.x - position.x)
 	var theta = desiredA - rot
 	
 	if theta > PI:
@@ -54,18 +60,18 @@ func _process(delta):
 	
 	rotation = -rot + PI/2
 
-func angleBetween(v1, v2):
-	var dotMagMag = v1.dot(v2) / (mag(v1) * mag(v2))
-	
-	var angle = acos(min(1, max(-1, dotMagMag)))
-	return angle
+#func angleBetween(v1, v2):
+#	var dotMagMag = v1.dot(v2) / (mag(v1) * mag(v2))
+#	
+#	var angle = acos(min(1, max(-1, dotMagMag)))
+#	return angle
 
-func mag(v):
-	var x = max(abs(v.x), abs(v.y))
-	var y = min(abs(v.x), abs(v.y))
+#func mag(v):
+#	var x = max(abs(v.x), abs(v.y))
+#	var y = min(abs(v.x), abs(v.y))
 	
-	if x == 0:
-		return 1
+#	if x == 0:
+#		return 1
 	
-	var t = y / x
-	return x * sqrt(1 + t * t)
+#	var t = y / x
+#	return x * sqrt(1 + t * t)
