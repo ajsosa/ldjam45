@@ -4,6 +4,7 @@ var swarm
 
 var speed = 1.5
 var rotSpeed = 0.07
+var isDead = false
 
 var rot = 0
 
@@ -16,6 +17,8 @@ func _ready():
 	
 	$Sprite/AnimationPlayer.play("ant_walk");
 	$Enemy.visible = false
+	$Death.visible = false
+	$Death/AnimationPlayer.stop()
 
 func setEnemy():
 	$Sprite.visible = false
@@ -23,6 +26,20 @@ func setEnemy():
 	
 	$Sprite/AnimationPlayer.stop()
 	$Enemy/AnimationPlayer.play("ant_walk")
+
+func playDeathAnimation():
+	$Sprite.visible = false
+	$Enemy.visible = false
+	$Death.visible = true
+	
+	isDead = true
+	
+	$Death/AnimationPlayer.stop(true)
+	$Death/AnimationPlayer.play("DeathAnimation")
+	
+func deathAnimationCompleted():
+	print("Death Animation Completed")
+	swarm.destroyAnt(self)
 
 func _process(delta):
 	#var others = swarm.getNeighbors(self)
@@ -65,8 +82,9 @@ func _process(delta):
 	var c = cos(rot)
 	var s = sin(rot)
 	
-	position.x += c * speed
-	position.y -= s * speed
+	if !isDead:
+		position.x += c * speed
+		position.y -= s * speed
 	
 	rotation = -rot + PI/2
 

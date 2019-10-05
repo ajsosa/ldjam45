@@ -65,9 +65,13 @@ func kill():
 	for ant in get_children():
 		if ant.name == "Marker":
 			continue	
-		ant.queue_free()
+		ant.get_node("Area2D").playDeathAnimation()
+		
 		quake.start(9, 0.2)
 		break
+
+func destroyAnt(ant):
+	ant.queue_free()
 
 func addAnt():
 	var ant = antObject.instance()
