@@ -1,30 +1,41 @@
 extends Camera2D
 
 var target
+const deltaLerp = 0.01
 
 func _ready():
+	
 	current = true
 	drag_margin_h_enabled = false
 	drag_margin_v_enabled = false
 	
-	var player = get_parent().get_node("Swarm")
+	var player = get_parent().get_node("Swarm").get_node("Marker")
 	
 	target = player
 	
-	limit_left = 0
-	limit_right = 1000
-	limit_top = 0
-	limit_bottom = 240
 	var targetPos = getTargetPos()
 	position.x = targetPos.x
 	position.y = targetPos.y
 
 func _process(delta):
+	
 	var targetPos = getTargetPos()
-	position.x = targetPos.x
-	position.y = targetPos.y
+	position = position.linear_interpolate(targetPos, deltaLerp)
+	
+	align()
+	
+	print(position)
+	
 
 func getTargetPos():
-	var x = target.get_parent().position.x + target.position.x
-	var y = target.get_parent().position.y + target.position.y
+	
+	var halfSize = get_viewport().size
+	
+	var x = target.position.x + halfSize.x * 0.5
+	var y = target.position.y + halfSize.y * 0.5
 	return Vector2(x, y)
+
+
+
+
+
