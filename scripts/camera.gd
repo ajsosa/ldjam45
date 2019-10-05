@@ -32,8 +32,3 @@ func getTargetPos():
 	var x = target.position.x + halfSize.x * 0.5
 	var y = target.position.y + halfSize.y * 0.5
 	return Vector2(x, y)
-
-
-
-
-
