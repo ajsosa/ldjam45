@@ -7,7 +7,7 @@
 
 [node name="Swarm" parent="." instance=ExtResource( 1 )]
 position = Vector2( 496, 304 )
-swarmCount = 50
+swarmCount = 5
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 512, 304 )
