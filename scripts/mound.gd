@@ -31,7 +31,7 @@ func _ready():
 	battleCircle.get_parent().connect("area_entered", self, "enterBattle") 
 	battleCircle.get_parent().connect("area_exited", self, "leaveBattle") 
 	
-	area = $Sprite/Area2D
+	area = $Sprite/MoundRadius
 	area.connect("area_entered", self, "entered") 
 	area.connect("area_exited", self, "exit") 
 	
@@ -106,10 +106,16 @@ func exit(other):
 	#battleCircle.disabled = true
 	
 func enterBattle(other):
+	if other.get_name() == "MoundRadius":
+		return
+	
 	engage = true
 	other.get_parent().get_parent().engage = true
 
 func leaveBattle(other):
+	if other.get_name() == "MoundRadius":
+		return
+		
 	engage = false
 	other.get_parent().get_parent().engage = false
 	

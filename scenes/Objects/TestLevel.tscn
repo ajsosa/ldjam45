@@ -25,7 +25,7 @@ position = Vector2( 512, 304 )
 script = ExtResource( 4 )
 
 [node name="Mounds" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="Mound" parent="Mounds" instance=ExtResource( 5 )]
 position = Vector2( 896, 384 )
+antCount = 20

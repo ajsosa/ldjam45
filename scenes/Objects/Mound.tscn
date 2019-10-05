@@ -17,9 +17,9 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 offset = Vector2( -9.25, 13.1 )
 
-[node name="Area2D" type="Area2D" parent="Sprite"]
+[node name="MoundRadius" type="Area2D" parent="Sprite"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/MoundRadius"]
 shape = SubResource( 1 )
 
 [node name="BattleCircle" type="Area2D" parent="Sprite"]
