@@ -24,8 +24,6 @@ func _process(delta):
 	
 	align()
 	
-	print(position)
-	
 
 func getTargetPos():
 	
