@@ -13,6 +13,16 @@ func _ready():
 	
 	rot = rand_range(0, PI * 2)
 	swarm = get_parent().get_parent()
+	
+	$Sprite/AnimationPlayer.play("ant_walk");
+	$Enemy.visible = false
+
+func setEnemy():
+	$Sprite.visible = false
+	$Enemy.visible = true
+	
+	$Sprite/AnimationPlayer.stop()
+	$Enemy/AnimationPlayer.play("ant_walk")
 
 func _process(delta):
 	#var others = swarm.getNeighbors(self)

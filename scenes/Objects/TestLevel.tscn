@@ -28,4 +28,3 @@ script = ExtResource( 4 )
 
 [node name="Mound" parent="Mounds" instance=ExtResource( 5 )]
 position = Vector2( 896, 384 )
-antCount = 20

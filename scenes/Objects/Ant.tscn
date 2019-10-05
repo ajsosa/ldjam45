@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/ant.gd" type="Script" id=1]
 [ext_resource path="res://sprites/AntSheet.png" type="Texture" id=2]
+[ext_resource path="res://sprites/AntSheet2.png" type="Texture" id=3]
+[ext_resource path="res://ant_animation2.tres" type="Animation" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "ant_idle"
@@ -47,8 +49,19 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 4
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D/Sprite"]
 autoplay = "ant_walk"
 anims/ant_idle = SubResource( 1 )
 anims/ant_walk = SubResource( 2 )
+
+[node name="Enemy" type="Sprite" parent="Area2D"]
+texture = ExtResource( 3 )
+vframes = 2
+hframes = 4
+frame = 2
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D/Enemy"]
+anims/ant_walk = ExtResource( 4 )

@@ -41,8 +41,8 @@ func _process(delta):
 	dt = delta
 	if makeAnts:
 		if antCount > 0:
-			addAnt()
-			swarm.swarmStrength += 1
+			var ant = addAnt()
+			ant.get_node("Area2D").setEnemy()
 			antCount -= 1
 			
 	if owned:
@@ -71,6 +71,8 @@ func _process(delta):
 func addAnt():
 	var ant = antObject.instance()
 	add_child(ant)
+	
+	return ant
 
 func entered(other):
 	if other.get_parent().get_name() != "Marker":
@@ -79,6 +81,7 @@ func entered(other):
 	if owned:
 		for i in range(spawn):
 			addAnt()
+			swarm.swarmStrength += 1
 			
 		spawn = 0
 		return
