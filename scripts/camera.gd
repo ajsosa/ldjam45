@@ -28,25 +28,23 @@ func _ready():
 	position.y = targetPos.y
 
 func _process(delta):
-	
 	var targetPos = getTargetPos()
 	position = position.linear_interpolate(targetPos, deltaLerp)
 	
 	adjustZoom()
-	
 	align()
 	
 
 func adjustZoom():
-	
 	var antCount = swarm.swarmStrength
 	var zoomAmount = minZoom + (antCount * zoomCoeff)
 	zoom = Vector2(zoomAmount, zoomAmount)
 	
 func getTargetPos():
-
-	var halfSize = get_viewport().size
+	#var halfSize = get_viewport().size
 	
-	var x = target.position.x + halfSize.x * 0.5
-	var y = target.position.y + halfSize.y * 0.5
+	#var x = target.position.x + halfSize.x * 0.5
+	#var y = target.position.y + halfSize.y * 0.5
+	var x = target.get_parent().position.x + target.position.x
+	var y = target.get_parent().position.y + target.position.y
 	return Vector2(x, y)
