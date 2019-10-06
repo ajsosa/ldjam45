@@ -25,11 +25,14 @@ var rogueAnts = []
 
 var dead = false
 
+var ants = []
+
 func _ready():
 	antObject = load("res://scenes/Objects/Ant.tscn")
 	
 	for i in range(swarmCount):
 		var ant = antObject.instance()
+		ants.append(ant)
 		add_child(ant)
 		
 	marker = $Marker
@@ -72,12 +75,12 @@ func kill():
 	var killed = false
 	var i = 0
 	var r = null
-	for ant in get_children():
-		if ant.name == "Marker":
-			continue	
-		ant.queue_free()
+	var killedAnt = null
+	for ant in ants:
+		ant.get_node("Area2D").kill()
 		swarmStrength -= 1
 		killed = true
+		killedAnt = ant
 		break
 	if not killed:
 		for rogue in rogueAnts:
@@ -97,11 +100,15 @@ func kill():
 		dead = true
 	else:
 		quake.start(9, 0.2)
+		
+	if killedAnt:
+		ants.erase(killedAnt)
 
 func addAnt():
 	var ant = antObject.instance()
 	add_child(ant)
 	swarmStrength += 1
+	ants.append(ant)
 
 func getNeighbors(target):
 	var others = []

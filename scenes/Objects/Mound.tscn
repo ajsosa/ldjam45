@@ -52,13 +52,13 @@ hframes = 2
 frame = 2
 
 [node name="MoundRadius" type="Area2D" parent="Sprite"]
-editor/display_folded = true
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/MoundRadius"]
 shape = SubResource( 1 )
 
 [node name="BattleCircle" type="Area2D" parent="Sprite"]
+editor/display_folded = true
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/BattleCircle"]

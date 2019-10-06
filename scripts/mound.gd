@@ -34,9 +34,11 @@ var cowardThreshold
 
 var anim
 
+var ants = []
+
 func _ready():
 	startingAntCount = antCount
-	antCap = antCount
+	antCap = antCount + antCount * 0.75
 	spawnRate = antCount * 2
 	cowardThreshold = antCount * 0.80
 	
@@ -67,14 +69,15 @@ func _process(delta):
 			antCount -= 1
 			
 	if owned and not isRogue:
-		if spawnTimer <= spawnRate:
-			spawnTimer += 2 * delta
-			spawn += 1
+		pass
+		#if spawnTimer <= spawnRate:
+		#	spawnTimer += 2 * delta
+		#	spawn += 1
 			
-			if spawn > antCap:
-				spawn = antCap
-		else:
-			spawnTimer = 0
+		#	if spawn > antCap:
+		#		spawn = antCap
+		#else:
+		#	spawnTimer = 0
 	elif not owned and battling:
 		if engage:
 			swarm.engage = true
@@ -96,9 +99,18 @@ func _process(delta):
 						if not isRogue:
 							swarm.rogueAnts.append(self)
 							anim.play("owned")
+							spawn = antCap
+							
 		var center = getCenter()
 		battleCircle.get_parent().position = center
 	
+	if spawn:
+		if owned and not isRogue:
+			for i in range(spawn):
+				addAnt()
+				startingAntCount += 1
+				swarm.swarmStrength += 1
+			spawn = 0
 	#if makeAnts:
 	#	if get_children().size() == 1:
 	#		owned = true
@@ -109,22 +121,14 @@ func _process(delta):
 func addAnt():
 	var ant = antObject.instance()
 	add_child(ant)
+	ants.append(ant)
 	
 	return ant
 
 func entered(other):
 	if other.get_parent().get_name() != "Marker":
 		return
-	
-	if owned and not isRogue:
-		for i in range(spawn):
-			addAnt()
-			startingAntCount += 1
-			swarm.swarmStrength += 1
-			
-		spawn = 0
-		return
-	elif owned:
+	if owned:
 		return
 	
 	target = other.get_parent()
@@ -178,12 +182,15 @@ func kill():
 	if swarm.get_children().size() == 1 && not owned:
 		return
 		
-	for ant in get_children():
-		if ant.name == "Sprite":
-			continue	
-		ant.queue_free()
+	var killedAnt = null
+	for ant in ants:
+		ant.get_node("Area2D").kill()
 		startingAntCount -= 1
+		killedAnt = ant
 		break
+		
+	if killedAnt:
+		ants.erase(killedAnt)
 
 func getTarget():
 	return target
@@ -191,9 +198,7 @@ func getTarget():
 func getCenter():
 	var pos = Vector2.ZERO
 	var i = 0
-	for ant in get_children():
-		if ant.name == "Sprite":
-			continue
+	for ant in ants:
 		pos += ant.get_node("Area2D").position
 		i += 1
 	
@@ -211,7 +216,5 @@ func defect():
 	swarm.rogueAnts.append(self)
 	
 func setFriendly():
-	for ant in get_children():
-		if ant.get_name() == "Sprite":
-			continue
+	for ant in ants:
 		ant.get_node("Area2D").setFriendly()

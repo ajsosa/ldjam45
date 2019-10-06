@@ -14,7 +14,9 @@ func _ready():
 	drag_margin_v_enabled = false
 	
 	limit_left = 0
+	limit_right = 3072
 	limit_top = 0
+	limit_bottom = 2176
 	
 	swarm = get_parent().get_node("Swarm")
 	var player = get_parent().get_node("Swarm").get_node("Marker")

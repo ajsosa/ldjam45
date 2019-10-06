@@ -6,6 +6,9 @@ var speed = 1.5
 var rotSpeed = 0.07
 
 var rot = 0
+var anim
+
+var killed = false
 
 func _ready():
 	speed = rand_range(0.8, 1.5)
@@ -16,6 +19,10 @@ func _ready():
 	
 	$Sprite/AnimationPlayer.play("ant_walk");
 	$Enemy.visible = false
+	anim = $Sprite/AnimationPlayer
+	
+	anim.connect("animation_finished", self, "exploded")
+	$Enemy/AnimationPlayer.connect("animation_finished", self, "exploded")
 
 func setEnemy():
 	$Sprite.visible = false
@@ -23,6 +30,7 @@ func setEnemy():
 	
 	$Sprite/AnimationPlayer.stop()
 	$Enemy/AnimationPlayer.play("ant_walk")
+	anim = $Enemy/AnimationPlayer
 	
 func setFriendly():
 	$Sprite.visible = true
@@ -30,6 +38,7 @@ func setFriendly():
 	
 	$Sprite/AnimationPlayer.play("ant_walk")
 	$Enemy/AnimationPlayer.stop()
+	anim = $Sprite/AnimationPlayer
 	
 func _process(delta):
 	#var others = swarm.getNeighbors(self)
@@ -72,10 +81,19 @@ func _process(delta):
 	var c = cos(rot)
 	var s = sin(rot)
 	
-	position.x += c * speed
-	position.y -= s * speed
+	if not killed:
+		position.x += c * speed
+		position.y -= s * speed
 	
 	rotation = -rot + PI/2
+	
+func kill():
+	killed = true
+	anim.play("explode")
+	
+func exploded(name):
+	if name == "explode":
+		self.queue_free()
 
 #func angleBetween(v1, v2):
 #	var dotMagMag = v1.dot(v2) / (mag(v1) * mag(v2))
