@@ -43,6 +43,7 @@ margin_right = -512.0
 margin_bottom = -304.0
 
 [node name="Mounds" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Mound" parent="Mounds" instance=ExtResource( 6 )]
 position = Vector2( 980.25, 1248 )
