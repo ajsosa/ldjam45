@@ -8,7 +8,7 @@ var oldPosition
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	#$AudioStreamPlayer.play(4.3)
+	$AudioStreamPlayer.play(4.3)
 
 func _process(delta):
 	OS.set_window_title(title + " | fps: " + str(Engine.get_frames_per_second()))
