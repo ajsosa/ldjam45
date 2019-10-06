@@ -21,6 +21,8 @@ var swarmStrength = swarmCount
 
 var quake = load("res://scripts/quake.gd").new()
 
+var rogueAnts = []
+
 func _ready():
 	antObject = load("res://scenes/Objects/Ant.tscn")
 	
@@ -62,12 +64,25 @@ func _process(delta):
 				kill()
 
 func kill():
+	var killed = false
 	for ant in get_children():
 		if ant.name == "Marker":
 			continue	
 		ant.queue_free()
 		quake.start(9, 0.2)
+		killed = true
 		break
+	if not killed:
+		for rogue in rogueAnts:
+			if rogue.startingAntCount == 0:
+				continue
+			rogue.kill()
+			swarmStrength -= 1
+			killed = true
+			break
+			
+	if not killed:
+		get_tree().reload_current_scene()
 
 func addAnt():
 	var ant = antObject.instance()

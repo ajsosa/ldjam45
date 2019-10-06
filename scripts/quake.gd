@@ -6,16 +6,19 @@ var timer = 0
 var view
 var globalTrans
 
+var cam
+
 func _ready():
 	pass
 	
 func registerCamera(camera):
+	cam = camera
 	view = camera.get_viewport()
 	globalTrans = view.get_global_canvas_transform()
 
 func start(intensity, duration):
 	stop()
-	self.intensity = intensity
+	self.intensity = intensity * cam.zoom.x
 	timer = duration
 	
 func stop():

@@ -4,14 +4,17 @@ var target
 var swarm
 const deltaLerp = 0.01
 
-const minZoom = 0.75
-const zoomCoeff = 0.0005
+const minZoom = 0.90
+const zoomCoeff = 0.0006
 
 func _ready():
 	
 	current = true
 	drag_margin_h_enabled = false
 	drag_margin_v_enabled = false
+	
+	limit_left = 0
+	limit_top = 0
 	
 	swarm = get_parent().get_node("Swarm")
 	var player = get_parent().get_node("Swarm").get_node("Marker")
@@ -34,14 +37,12 @@ func _process(delta):
 
 func adjustZoom():
 	
-	var antCount = swarm.get_children().size()
+	var antCount = swarm.swarmStrength
 	var zoomAmount = minZoom + (antCount * zoomCoeff)
 	zoom = Vector2(zoomAmount, zoomAmount)
 	
-	
-
 func getTargetPos():
-	
+
 	var halfSize = get_viewport().size
 	
 	var x = target.position.x + halfSize.x * 0.5

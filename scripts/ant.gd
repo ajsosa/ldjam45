@@ -23,7 +23,14 @@ func setEnemy():
 	
 	$Sprite/AnimationPlayer.stop()
 	$Enemy/AnimationPlayer.play("ant_walk")
-
+	
+func setFriendly():
+	$Sprite.visible = true
+	$Enemy.visible = false
+	
+	$Sprite/AnimationPlayer.play("ant_walk")
+	$Enemy/AnimationPlayer.stop()
+	
 func _process(delta):
 	#var others = swarm.getNeighbors(self)
 	
