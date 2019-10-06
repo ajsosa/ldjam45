@@ -4,18 +4,18 @@
 [ext_resource path="res://crappyTileset.tres" type="TileSet" id=2]
 [ext_resource path="res://scenes/Objects/Swarm.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/camera.gd" type="Script" id=4]
-[ext_resource path="res://EndScreen.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/Objects/Mound.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/Objects/SandCastle.tscn" type="PackedScene" id=7]
-[ext_resource path="res://sounds/Ants Unravel MASTER.ogg" type="AudioStream" id=8]
-[ext_resource path="res://scenes/Objects/QueenNest.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/Objects/Log.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/Objects/Leaf.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/Objects/Fly.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/Objects/Rock.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/Objects/Bone.tscn" type="PackedScene" id=14]
-[ext_resource path="res://scenes/Objects/Stick.tscn" type="PackedScene" id=15]
-[ext_resource path="res://scenes/Objects/HoofPrint.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/Objects/Mound.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Objects/SandCastle.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sounds/Ants Unravel MASTER.ogg" type="AudioStream" id=7]
+[ext_resource path="res://scenes/Objects/QueenNest.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Objects/Log.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/Objects/Leaf.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/Objects/Fly.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/Objects/Rock.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/Objects/Bone.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/Objects/Stick.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/Objects/HoofPrint.tscn" type="PackedScene" id=15]
+[ext_resource path="res://EndScreen.tscn" type="PackedScene" id=16]
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource( 1 )
@@ -35,93 +35,86 @@ position = Vector2( 496, 304 )
 position = Vector2( 512, 304 )
 script = ExtResource( 4 )
 
-[node name="EndScreen" parent="Camera2D" instance=ExtResource( 5 )]
-visible = false
-margin_left = -512.0
-margin_top = -304.0
-margin_right = -512.0
-margin_bottom = -304.0
-
 [node name="Mounds" type="Node2D" parent="."]
 editor/display_folded = true
 
-[node name="Mound" parent="Mounds" instance=ExtResource( 6 )]
+[node name="Mound" parent="Mounds" instance=ExtResource( 5 )]
 position = Vector2( 980.25, 1248 )
 
-[node name="Mound2" parent="Mounds" instance=ExtResource( 6 )]
+[node name="Mound2" parent="Mounds" instance=ExtResource( 5 )]
 position = Vector2( 294.75, 1376 )
 antCount = 50
 
-[node name="Mound3" parent="Mounds" instance=ExtResource( 6 )]
+[node name="Mound3" parent="Mounds" instance=ExtResource( 5 )]
 position = Vector2( 1037.5, 288 )
 antCount = 7
 
-[node name="Mound4" parent="Mounds" instance=ExtResource( 6 )]
+[node name="Mound4" parent="Mounds" instance=ExtResource( 5 )]
 position = Vector2( 1248, 672 )
 antCount = 35
 
-[node name="Mound5" parent="Mounds" instance=ExtResource( 6 )]
+[node name="Mound5" parent="Mounds" instance=ExtResource( 5 )]
 position = Vector2( 1408, 1101.1 )
 antCount = 100
 
-[node name="Mound6" parent="Mounds" instance=ExtResource( 6 )]
+[node name="Mound6" parent="Mounds" instance=ExtResource( 5 )]
 position = Vector2( 1696, 717.1 )
 antCount = 100
 
-[node name="Mound7" parent="Mounds" instance=ExtResource( 6 )]
+[node name="Mound7" parent="Mounds" instance=ExtResource( 5 )]
 position = Vector2( 256, 1824 )
 antCount = 100
 
-[node name="Mound8" parent="Mounds" instance=ExtResource( 6 )]
+[node name="Mound8" parent="Mounds" instance=ExtResource( 5 )]
 position = Vector2( 614.75, 1984 )
 antCount = 200
 
-[node name="Mound10" parent="Mounds" instance=ExtResource( 6 )]
+[node name="Mound10" parent="Mounds" instance=ExtResource( 5 )]
 position = Vector2( 1037.5, 1760 )
 antCount = 200
 
-[node name="Mound9" parent="Mounds" instance=ExtResource( 6 )]
+[node name="Mound9" parent="Mounds" instance=ExtResource( 5 )]
 position = Vector2( 1952, 192 )
 antCount = 299
 
 [node name="RogueAnts" type="Node2D" parent="."]
 editor/display_folded = true
 
-[node name="Mound" parent="RogueAnts" instance=ExtResource( 6 )]
+[node name="Mound" parent="RogueAnts" instance=ExtResource( 5 )]
 position = Vector2( 928, 864 )
 antCount = 3
 isRogue = true
 
-[node name="Mound2" parent="RogueAnts" instance=ExtResource( 6 )]
+[node name="Mound2" parent="RogueAnts" instance=ExtResource( 5 )]
 position = Vector2( 736, 544 )
 antCount = 1
 isRogue = true
 
-[node name="Mound3" parent="RogueAnts" instance=ExtResource( 6 )]
+[node name="Mound3" parent="RogueAnts" instance=ExtResource( 5 )]
 position = Vector2( 224, 576 )
 antCount = 1
 isRogue = true
 
-[node name="Mound4" parent="RogueAnts" instance=ExtResource( 6 )]
+[node name="Mound4" parent="RogueAnts" instance=ExtResource( 5 )]
 position = Vector2( 256, 992 )
 isRogue = true
 
-[node name="Mound5" parent="RogueAnts" instance=ExtResource( 6 )]
+[node name="Mound5" parent="RogueAnts" instance=ExtResource( 5 )]
 position = Vector2( 608, 1056 )
 antCount = 7
 isRogue = true
 
-[node name="Mound6" parent="RogueAnts" instance=ExtResource( 6 )]
+[node name="Mound6" parent="RogueAnts" instance=ExtResource( 5 )]
 position = Vector2( 672, 1568 )
 antCount = 60
 isRogue = true
 
-[node name="Mound7" parent="RogueAnts" instance=ExtResource( 6 )]
+[node name="Mound7" parent="RogueAnts" instance=ExtResource( 5 )]
 position = Vector2( 1504, 269.1 )
 antCount = 60
 isRogue = true
 
-[node name="Mound9" parent="RogueAnts" instance=ExtResource( 6 )]
+[node name="Mound9" parent="RogueAnts" instance=ExtResource( 5 )]
 position = Vector2( 1990.75, 800 )
 antCount = 500
 isRogue = true
@@ -131,30 +124,30 @@ willDefect = false
 editor/display_folded = true
 position = Vector2( -896, 0 )
 
-[node name="SandCastle" parent="BarrierMounds" instance=ExtResource( 7 )]
+[node name="SandCastle" parent="BarrierMounds" instance=ExtResource( 6 )]
 position = Vector2( 2560, 1472 )
 antCount = 200
 isSandCastle = true
 
-[node name="SandCastle2" parent="BarrierMounds" instance=ExtResource( 7 )]
+[node name="SandCastle2" parent="BarrierMounds" instance=ExtResource( 6 )]
 position = Vector2( 2880, 1344 )
 antCount = 200
 isSandCastle = true
 
-[node name="SandCastle3" parent="BarrierMounds" instance=ExtResource( 7 )]
+[node name="SandCastle3" parent="BarrierMounds" instance=ExtResource( 6 )]
 position = Vector2( 2336, 1760 )
 antCount = 200
 isSandCastle = true
 
-[node name="SandCastle4" parent="BarrierMounds" instance=ExtResource( 7 )]
+[node name="SandCastle4" parent="BarrierMounds" instance=ExtResource( 6 )]
 position = Vector2( 2272, 2048 )
 antCount = 200
 isSandCastle = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
+stream = ExtResource( 7 )
 
-[node name="QueenNest" parent="." instance=ExtResource( 9 )]
+[node name="QueenNest" parent="." instance=ExtResource( 8 )]
 position = Vector2( 1888, 1888 )
 antCount = 400
 isQueen = true
@@ -166,108 +159,115 @@ editor/display_folded = true
 [node name="Logs" type="Node2D" parent="Scenery"]
 editor/display_folded = true
 
-[node name="Log" parent="Scenery/Logs" instance=ExtResource( 10 )]
+[node name="Log" parent="Scenery/Logs" instance=ExtResource( 9 )]
 position = Vector2( 653.5, 160 )
 scale = Vector2( 4, 4 )
 
-[node name="Log2" parent="Scenery/Logs" instance=ExtResource( 10 )]
+[node name="Log2" parent="Scenery/Logs" instance=ExtResource( 9 )]
 position = Vector2( 1190.75, 864 )
 scale = Vector2( 4, 4 )
 
 [node name="Leaves" type="Node2D" parent="Scenery"]
 editor/display_folded = true
 
-[node name="Leaf" parent="Scenery/Leaves" instance=ExtResource( 11 )]
+[node name="Leaf" parent="Scenery/Leaves" instance=ExtResource( 10 )]
 position = Vector2( 96, 653.1 )
 scale = Vector2( 3, 3 )
 
-[node name="Leaf2" parent="Scenery/Leaves" instance=ExtResource( 11 )]
+[node name="Leaf2" parent="Scenery/Leaves" instance=ExtResource( 10 )]
 position = Vector2( 1734.75, 1101.1 )
 scale = Vector2( 3, 3 )
 
-[node name="Leaf3" parent="Scenery/Leaves" instance=ExtResource( 11 )]
+[node name="Leaf3" parent="Scenery/Leaves" instance=ExtResource( 10 )]
 position = Vector2( 864, 1664 )
 scale = Vector2( 3, 3 )
 
 [node name="Flies" type="Node2D" parent="Scenery"]
 editor/display_folded = true
 
-[node name="Fly" parent="Scenery/Flies" instance=ExtResource( 12 )]
+[node name="Fly" parent="Scenery/Flies" instance=ExtResource( 11 )]
 position = Vector2( 1286.75, 1440 )
 scale = Vector2( 4, 4 )
 
 [node name="Rocks" type="Node2D" parent="Scenery"]
 editor/display_folded = true
 
-[node name="Rock" parent="Scenery/Rocks" instance=ExtResource( 13 )]
+[node name="Rock" parent="Scenery/Rocks" instance=ExtResource( 12 )]
 position = Vector2( 966.75, 2080 )
 scale = Vector2( 4, 4 )
 
-[node name="Rock3" parent="Scenery/Rocks" instance=ExtResource( 13 )]
+[node name="Rock3" parent="Scenery/Rocks" instance=ExtResource( 12 )]
 position = Vector2( 2016, 1613.1 )
 scale = Vector2( 4, 4 )
 
-[node name="Rock4" parent="Scenery/Rocks" instance=ExtResource( 13 )]
+[node name="Rock4" parent="Scenery/Rocks" instance=ExtResource( 12 )]
 position = Vector2( 1760, 2112 )
 scale = Vector2( 4, 4 )
 
-[node name="Rock2" parent="Scenery/Rocks" instance=ExtResource( 13 )]
+[node name="Rock2" parent="Scenery/Rocks" instance=ExtResource( 12 )]
 position = Vector2( 384, 1600 )
 scale = Vector2( 3, 3 )
 
 [node name="Bones" type="Node2D" parent="Scenery"]
 editor/display_folded = true
 
-[node name="Bone" parent="Scenery/Bones" instance=ExtResource( 14 )]
+[node name="Bone" parent="Scenery/Bones" instance=ExtResource( 13 )]
 position = Vector2( 128, 96 )
 scale = Vector2( 3, 3 )
 
-[node name="Bone2" parent="Scenery/Bones" instance=ExtResource( 14 )]
+[node name="Bone2" parent="Scenery/Bones" instance=ExtResource( 13 )]
 position = Vector2( 1952, 512 )
 scale = Vector2( 3, 3 )
 
 [node name="Sticks" type="Node2D" parent="Scenery"]
 editor/display_folded = true
 
-[node name="Stick" parent="Scenery/Sticks" instance=ExtResource( 15 )]
+[node name="Stick" parent="Scenery/Sticks" instance=ExtResource( 14 )]
 position = Vector2( 384, 1056 )
 scale = Vector2( 3, 3 )
 
-[node name="Stick2" parent="Scenery/Sticks" instance=ExtResource( 15 )]
+[node name="Stick2" parent="Scenery/Sticks" instance=ExtResource( 14 )]
 position = Vector2( 960, 416 )
 scale = Vector2( 3, 3 )
 
-[node name="Stick3" parent="Scenery/Sticks" instance=ExtResource( 15 )]
+[node name="Stick3" parent="Scenery/Sticks" instance=ExtResource( 14 )]
 position = Vector2( 96, 1869.1 )
 scale = Vector2( 3, 3 )
 
-[node name="Stick4" parent="Scenery/Sticks" instance=ExtResource( 15 )]
+[node name="Stick4" parent="Scenery/Sticks" instance=ExtResource( 14 )]
 position = Vector2( 1686.75, 250.2 )
 scale = Vector2( 3, 3 )
 
 [node name="HoofPrints" type="Node2D" parent="Scenery"]
 
-[node name="HoofPrint" parent="Scenery/HoofPrints" instance=ExtResource( 16 )]
+[node name="HoofPrint" parent="Scenery/HoofPrints" instance=ExtResource( 15 )]
 position = Vector2( 1248, 64 )
 rotation = 2.37016
 scale = Vector2( 6, 6 )
 
-[node name="HoofPrint2" parent="Scenery/HoofPrints" instance=ExtResource( 16 )]
+[node name="HoofPrint2" parent="Scenery/HoofPrints" instance=ExtResource( 15 )]
 position = Vector2( 1408, 589.1 )
 rotation = 2.37016
 scale = Vector2( 6, 6 )
 
-[node name="HoofPrint3" parent="Scenery/HoofPrints" instance=ExtResource( 16 )]
+[node name="HoofPrint3" parent="Scenery/HoofPrints" instance=ExtResource( 15 )]
 position = Vector2( 2048, 640 )
 rotation = 2.37016
 scale = Vector2( 6, 6 )
 
-[node name="HoofPrint4" parent="Scenery/HoofPrints" instance=ExtResource( 16 )]
+[node name="HoofPrint4" parent="Scenery/HoofPrints" instance=ExtResource( 15 )]
 position = Vector2( 416, 2074.23 )
 rotation = 2.80125
 scale = Vector2( 6, 6 )
 
-[node name="HoofPrint5" parent="Scenery/HoofPrints" instance=ExtResource( 16 )]
+[node name="HoofPrint5" parent="Scenery/HoofPrints" instance=ExtResource( 15 )]
 position = Vector2( 32, 1648 )
 rotation = 2.80125
 scale = Vector2( 6, 6 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="EndScreen" parent="CanvasLayer" instance=ExtResource( 16 )]
+visible = false
+margin_top = -300.0
+margin_bottom = -300.0

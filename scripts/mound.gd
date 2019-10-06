@@ -204,8 +204,7 @@ func kill():
 			swarm.engage = false
 			swarm.battling = false
 			
-			var endScreenNode = get_node(".../Camera2D/EndScreen")
-			
+			var endScreenNode = get_tree().get_root().get_node("TestLevel/CanvasLayer/EndScreen")
 			endScreenNode.visible = true
 		else:
 			return
