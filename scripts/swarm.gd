@@ -9,6 +9,7 @@ var marker
 var sight = 10
 
 var battling = false
+var spawn = false
 
 var battleLimit = 5
 var battleTimer = 0

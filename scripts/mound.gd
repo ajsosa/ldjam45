@@ -3,6 +3,8 @@ extends Node
 export var antCount = 20
 export var isRogue = false
 export var isQueen = false
+export var isSandCastle = false
+export var willDefect = true
 
 var owned = false
 
@@ -65,6 +67,8 @@ func _ready():
 	target = area.position
 
 func _process(delta):
+	if isQueen:
+		pass
 	dt = delta
 	if makeAnts:
 		if antCount > 0:
@@ -74,14 +78,6 @@ func _process(delta):
 			
 	if owned and not isRogue:
 		pass
-		#if spawnTimer <= spawnRate:
-		#	spawnTimer += 2 * delta
-		#	spawn += 1
-			
-		#	if spawn > antCap:
-		#		spawn = antCap
-		#else:
-		#	spawnTimer = 0
 	elif not owned and battling:
 		if engage:
 			swarm.engage = true
@@ -89,7 +85,7 @@ func _process(delta):
 			killRate = swarm.swarmStrength
 			if not queenSpawned:
 				swarm.killRate = startingAntCount
-			if isRogue and cowardThreshold > startingAntCount:
+			if willDefect and isRogue and cowardThreshold > startingAntCount:
 				defect()
 			else:
 				if battleTimer <= battleLimit:
@@ -110,7 +106,7 @@ func _process(delta):
 		battleCircle.get_parent().position = center
 	
 	if spawn and not isQueen:
-		if owned and not isRogue:
+		if owned and not isRogue and not isSandCastle:
 			for i in range(spawn):
 				addAnt()
 				startingAntCount += 1
@@ -194,11 +190,12 @@ func kill():
 	var killQueen = false	
 	if queenSpawned:
 		queenHealth -= 1
-		if queenHealth > 0:
+		if queenHealth <= 0:
 			owned = true
 			swarm.killRate = 0
 			swarm.engage = false
-			swarm.battle = false
+			swarm.battling = false
+		else:
 			return
 		
 	var killedAnt = null
