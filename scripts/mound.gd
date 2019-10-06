@@ -72,7 +72,9 @@ func _ready():
 
 func _process(delta):
 	if isQueen:
-		pass
+		if swarm:
+			swarm.battling = true
+		battling = true
 	dt = delta
 	if makeAnts:
 		if antCount > 0:
