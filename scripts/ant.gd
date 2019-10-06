@@ -12,6 +12,8 @@ var killed = false
 
 var baseScale = 1
 
+var offSet = Vector2(rand_range(-50, 50), rand_range(-50, 50))
+
 func _ready():
 	speed = rand_range(1.3, 1.7)
 	rotSpeed = rand_range(0.007, 0.04)
@@ -48,6 +50,8 @@ func _process(delta):
 	if not pos is Vector2:
 		if pos.get_name() == "Marker":
 			pos = swarm.to_local(pos.global_position)
+	
+	pos = pos + offSet
 	
 	var desiredA = -atan2(pos.y - position.y, pos.x - position.x)
 	var theta = desiredA - rot

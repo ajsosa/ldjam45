@@ -153,6 +153,7 @@ isQueen = true
 willDefect = false
 
 [node name="Scenery" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Logs" type="Node2D" parent="Scenery"]
 editor/display_folded = true
