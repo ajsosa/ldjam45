@@ -10,6 +10,8 @@ var anim
 
 var killed = false
 
+var baseScale = 1
+
 func _ready():
 	speed = rand_range(1.3, 1.7)
 	rotSpeed = rand_range(0.007, 0.04)
@@ -41,26 +43,6 @@ func setFriendly():
 	anim = $Sprite/AnimationPlayer
 	
 func _process(delta):
-	#var others = swarm.getNeighbors(self)
-	
-	#for other in others:
-		#var between = angleBetween(other.position, position)
-		#var degree = rad2deg(between)
-
-		#if degree > 100:
-			#continue
-	
-		#var desiredA = -atan2(other.position.y - position.y, other.position.x - position.x)
-		#var theta = desiredA - rot
-		
-		#if theta > PI:
-		#	rot += 2 * PI
-		#elif theta < -PI:
-		#	rot -= 2 * PI
-			
-		#var turnVelo = (desiredA - rot) * rotSpeed * 0.1
-		#rot -= turnVelo
-	
 	var pos = swarm.getTarget()
 	
 	if not pos is Vector2:
@@ -94,19 +76,3 @@ func kill():
 func exploded(name):
 	if name == "explode":
 		self.queue_free()
-
-#func angleBetween(v1, v2):
-#	var dotMagMag = v1.dot(v2) / (mag(v1) * mag(v2))
-#	
-#	var angle = acos(min(1, max(-1, dotMagMag)))
-#	return angle
-
-#func mag(v):
-#	var x = max(abs(v.x), abs(v.y))
-#	var y = min(abs(v.x), abs(v.y))
-	
-#	if x == 0:
-#		return 1
-	
-#	var t = y / x
-#	return x * sqrt(1 + t * t)
