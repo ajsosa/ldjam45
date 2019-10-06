@@ -9,7 +9,7 @@ var rot = 0
 
 func _ready():
 	speed = rand_range(0.8, 1.5)
-	rotSpeed = rand_range(0.005, 0.04)
+	rotSpeed = rand_range(0.007, 0.04)
 	
 	rot = rand_range(0, PI * 2)
 	swarm = get_parent().get_parent()

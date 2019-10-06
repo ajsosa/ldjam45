@@ -23,6 +23,8 @@ var quake = load("res://scripts/quake.gd").new()
 
 var rogueAnts = []
 
+var dead = false
+
 func _ready():
 	antObject = load("res://scenes/Objects/Ant.tscn")
 	
@@ -38,6 +40,9 @@ func _exit_tree():
     quake.free()
 
 func _process(delta):
+	if dead:
+		get_tree().reload_current_scene()
+	
 	quake.update(delta)
 	dt = delta
 	if Input.is_action_pressed("addAnt"):
@@ -65,11 +70,13 @@ func _process(delta):
 
 func kill():
 	var killed = false
+	var i = 0
+	var r = null
 	for ant in get_children():
 		if ant.name == "Marker":
 			continue	
 		ant.queue_free()
-		quake.start(9, 0.2)
+		swarmStrength -= 1
 		killed = true
 		break
 	if not killed:
@@ -79,10 +86,17 @@ func kill():
 			rogue.kill()
 			swarmStrength -= 1
 			killed = true
+			i += 1
+			r = rogue
 			break
-			
-	if not killed:
-		get_tree().reload_current_scene()
+	if killed and swarmStrength == 0 and rogueAnts.size() == 0:
+		dead = true
+	elif killed and i == rogueAnts.size() and r and r.startingAntCount == 0:
+		dead = true	
+	elif not killed:
+		dead = true
+	else:
+		quake.start(9, 0.2)
 
 func addAnt():
 	var ant = antObject.instance()

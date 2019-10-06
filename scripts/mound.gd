@@ -75,8 +75,12 @@ func _process(delta):
 				spawn = antCap
 		else:
 			spawnTimer = 0
-	elif battling:
+	elif not owned and battling:
 		if engage:
+			swarm.engage = true
+			swarm.battling = true
+			killRate = swarm.swarmStrength
+			swarm.killRate = startingAntCount
 			if isRogue and cowardThreshold > startingAntCount:
 				defect()
 			else:
@@ -85,15 +89,22 @@ func _process(delta):
 				else:
 					battleTimer = 0
 					kill()
+					if startingAntCount <= 0:
+						swarm.engage = false
+						swarm.battling = false
+						owned = true
+						if not isRogue:
+							swarm.rogueAnts.append(self)
+							anim.play("owned")
 		var center = getCenter()
 		battleCircle.get_parent().position = center
 	
-	if makeAnts:
-		if get_children().size() == 1:
-			owned = true
-			if not isRogue:
-				swarm.rogueAnts.append(self)
-				anim.play("owned")
+	#if makeAnts:
+	#	if get_children().size() == 1:
+	#		owned = true
+	#		if not isRogue:
+	#			swarm.rogueAnts.append(self)
+	#			anim.play("owned")
 
 func addAnt():
 	var ant = antObject.instance()
@@ -105,13 +116,15 @@ func entered(other):
 	if other.get_parent().get_name() != "Marker":
 		return
 	
-	if owned:
+	if owned and not isRogue:
 		for i in range(spawn):
 			addAnt()
 			startingAntCount += 1
 			swarm.swarmStrength += 1
 			
 		spawn = 0
+		return
+	elif owned:
 		return
 	
 	target = other.get_parent()
@@ -140,6 +153,9 @@ func exit(other):
 	
 func enterBattle(other):
 	if other.get_name() == "MoundRadius":
+		return
+		
+	if owned:
 		return
 	
 	engage = true
@@ -191,6 +207,7 @@ func defect():
 	battling = false
 	engage = false
 	swarm.battling = false
+	swarm.engage = false
 	swarm.rogueAnts.append(self)
 	
 func setFriendly():

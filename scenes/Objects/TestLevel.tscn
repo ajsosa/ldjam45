@@ -27,24 +27,24 @@ script = ExtResource( 4 )
 [node name="Mounds" type="Node2D" parent="."]
 
 [node name="Mound" parent="Mounds" instance=ExtResource( 5 )]
-position = Vector2( 2112, 448 )
+position = Vector2( 980.25, 1248 )
 
 [node name="Mound2" parent="Mounds" instance=ExtResource( 5 )]
-position = Vector2( 1728, 909.1 )
+position = Vector2( 294.75, 1376 )
 antCount = 50
 
 [node name="Mound3" parent="Mounds" instance=ExtResource( 5 )]
-position = Vector2( 1152, 320 )
+position = Vector2( 1037.5, 288 )
 antCount = 7
 
 [node name="Mound4" parent="Mounds" instance=ExtResource( 5 )]
-position = Vector2( 1094.75, 1984 )
+position = Vector2( 1248, 672 )
 antCount = 35
 
 [node name="RogueAnts" type="Node2D" parent="."]
 
 [node name="Mound" parent="RogueAnts" instance=ExtResource( 5 )]
-position = Vector2( 1120, 864 )
+position = Vector2( 928, 864 )
 antCount = 3
 isRogue = true
 
@@ -59,7 +59,7 @@ antCount = 1
 isRogue = true
 
 [node name="Mound4" parent="RogueAnts" instance=ExtResource( 5 )]
-position = Vector2( 416, 1536 )
+position = Vector2( 256, 992 )
 isRogue = true
 
 [node name="Mound5" parent="RogueAnts" instance=ExtResource( 5 )]
