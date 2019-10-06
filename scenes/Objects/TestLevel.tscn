@@ -35,14 +35,14 @@ position = Vector2( 496, 304 )
 position = Vector2( 512, 304 )
 script = ExtResource( 4 )
 
-[node name="MarginContainer" parent="Camera2D" instance=ExtResource( 5 )]
+[node name="EndScreen" parent="Camera2D" instance=ExtResource( 5 )]
+visible = false
 margin_left = -512.0
 margin_top = -304.0
 margin_right = -512.0
 margin_bottom = -304.0
 
 [node name="Mounds" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="Mound" parent="Mounds" instance=ExtResource( 6 )]
 position = Vector2( 980.25, 1248 )

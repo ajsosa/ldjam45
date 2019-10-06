@@ -101,7 +101,10 @@ func _process(delta):
 						swarm.engage = false
 						swarm.battling = false
 						owned = true
-						audio.play()
+						
+						if audio:
+							audio.play()
+						
 						if not isRogue:
 							swarm.rogueAnts.append(self)
 							anim.play("owned")
@@ -196,11 +199,14 @@ func kill():
 	if queenSpawned:
 		queenHealth -= 1
 		if queenHealth <= 0:
-			audio.play()
+			if audio:
+				audio.play()
 			owned = true
 			swarm.killRate = 0
 			swarm.engage = false
 			swarm.battling = false
+			
+			get_parent().get_parent().get_node("Camera2D/EndScreen").visible = true
 		else:
 			return
 		
@@ -238,7 +244,8 @@ func defect():
 	swarm.battling = false
 	swarm.engage = false
 	swarm.rogueAnts.append(self)
-	audio.play()
+	if audio:
+		audio.play()
 	
 func setFriendly():
 	for ant in ants:
