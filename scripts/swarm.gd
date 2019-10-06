@@ -49,8 +49,8 @@ func _process(delta):
 	
 	quake.update(delta)
 	dt = delta
-	if Input.is_action_pressed("addAnt"):
-		addAnt()
+	#if Input.is_action_pressed("addAnt"):
+	#	addAnt()
 	
 	if Input.is_action_pressed("down"):
 		target.y += 70 * delta
