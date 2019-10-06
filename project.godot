@@ -17,7 +17,7 @@ _global_script_class_icons={
 
 config/name="ldjam45"
 run/main_scene="res://scenes/Objects/TestLevel.tscn"
-config/icon="res://icon.png"
+config/icon="res://sprites/icon.png"
 
 [debug]
 
