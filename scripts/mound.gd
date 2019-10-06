@@ -2,6 +2,7 @@ extends Node
 
 export var antCount = 20
 export var isRogue = false
+export var isQueen = false
 
 var owned = false
 
@@ -35,6 +36,9 @@ var cowardThreshold
 var anim
 
 var ants = []
+
+var queenSpawned = false
+var queenHealth = 500
 
 func _ready():
 	startingAntCount = antCount
@@ -83,7 +87,8 @@ func _process(delta):
 			swarm.engage = true
 			swarm.battling = true
 			killRate = swarm.swarmStrength
-			swarm.killRate = startingAntCount
+			if not queenSpawned:
+				swarm.killRate = startingAntCount
 			if isRogue and cowardThreshold > startingAntCount:
 				defect()
 			else:
@@ -92,7 +97,7 @@ func _process(delta):
 				else:
 					battleTimer = 0
 					kill()
-					if startingAntCount <= 0:
+					if startingAntCount <= 0 and not queenSpawned:
 						swarm.engage = false
 						swarm.battling = false
 						owned = true
@@ -104,19 +109,26 @@ func _process(delta):
 		var center = getCenter()
 		battleCircle.get_parent().position = center
 	
-	if spawn:
+	if spawn and not isQueen:
 		if owned and not isRogue:
 			for i in range(spawn):
 				addAnt()
 				startingAntCount += 1
 				swarm.swarmStrength += 1
 			spawn = 0
-	#if makeAnts:
-	#	if get_children().size() == 1:
-	#		owned = true
-	#		if not isRogue:
-	#			swarm.rogueAnts.append(self)
-	#			anim.play("owned")
+	
+	if spawn and isQueen:
+		var ant = addAnt()
+		ant.get_node("Area2D").setEnemy()
+		ant.get_node("Area2D").set_scale(Vector2(15, 15))
+		queenSpawned = true
+		spawn = 0
+		battling = true
+		engage = true
+		swarm.battling = true
+		swarm.engage = true
+		owned = false
+		swarm.killRate = 200
 
 func addAnt():
 	var ant = antObject.instance()
@@ -140,8 +152,6 @@ func entered(other):
 	other.get_parent().get_parent().killRate = startingAntCount
 	swarm = other.get_parent().get_parent()
 	
-	#battleCircle.disabled = false
-	
 func exit(other):
 	if other.get_parent().get_name() != "Marker":
 		return
@@ -153,7 +163,6 @@ func exit(other):
 	target = area.position
 	battling = false
 	other.get_parent().get_parent().battling = false
-	#battleCircle.disabled = true
 	
 func enterBattle(other):
 	if other.get_name() == "MoundRadius":
@@ -181,6 +190,16 @@ func kill():
 		
 	if swarm.get_children().size() == 1 && not owned:
 		return
+	
+	var killQueen = false	
+	if queenSpawned:
+		queenHealth -= 1
+		if queenHealth > 0:
+			owned = true
+			swarm.killRate = 0
+			swarm.engage = false
+			swarm.battle = false
+			return
 		
 	var killedAnt = null
 	for ant in ants:
@@ -201,6 +220,8 @@ func getCenter():
 	for ant in ants:
 		pos += ant.get_node("Area2D").position
 		i += 1
+	if i == 0:
+		return Vector2.ZERO
 	
 	var avg = pos / i
 	return avg

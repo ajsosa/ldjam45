@@ -11,7 +11,7 @@ var anim
 var killed = false
 
 func _ready():
-	speed = rand_range(0.8, 1.5)
+	speed = rand_range(1.1, 1.5)
 	rotSpeed = rand_range(0.007, 0.04)
 	
 	rot = rand_range(0, PI * 2)

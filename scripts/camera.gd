@@ -5,7 +5,7 @@ var swarm
 const deltaLerp = 0.01
 
 const minZoom = 0.90
-const zoomCoeff = 0.0006
+const zoomCoeff = 0.0004
 
 func _ready():
 	
