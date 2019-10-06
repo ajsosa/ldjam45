@@ -14,12 +14,16 @@ var baseScale = 1
 
 var offSet = Vector2(rand_range(-50, 50), rand_range(-50, 50))
 
+var audio
+
 func _ready():
 	speed = rand_range(1.3, 1.7)
 	rotSpeed = rand_range(0.007, 0.04)
 	
 	rot = rand_range(0, PI * 2)
 	swarm = get_parent().get_parent()
+	
+	audio = $AudioStreamPlayer2D
 	
 	$Sprite/AnimationPlayer.play("ant_walk");
 	$Enemy.visible = false
@@ -75,6 +79,7 @@ func _process(delta):
 	
 func kill():
 	killed = true
+	audio.play()
 	anim.play("explode")
 	
 func exploded(name):

@@ -8,6 +8,7 @@ var oldPosition
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	$AudioStreamPlayer.connect("finished", self, "onComplete")
 	$AudioStreamPlayer.play(4.3)
 
 func _process(delta):
@@ -32,3 +33,7 @@ func _process(delta):
 
 	if(Input.is_action_just_pressed('quit')):
 		get_tree().quit()
+		
+func onComplete():
+	$AudioStreamPlayer.seek(0)
+	pass

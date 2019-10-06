@@ -42,6 +42,8 @@ var ants = []
 var queenSpawned = false
 var queenHealth = 500
 
+var audio
+
 func _ready():
 	startingAntCount = antCount
 	antCap = antCount + antCount * 0.75
@@ -54,7 +56,9 @@ func _ready():
 	
 	area = $Sprite/MoundRadius
 	area.connect("area_entered", self, "entered") 
-	area.connect("area_exited", self, "exit") 
+	area.connect("area_exited", self, "exit")
+	
+	audio = $AudioStreamPlayer2D
 	
 	antObject = load("res://scenes/Objects/Ant.tscn")
 	anim = $Sprite/AnimationPlayer
@@ -97,6 +101,7 @@ func _process(delta):
 						swarm.engage = false
 						swarm.battling = false
 						owned = true
+						audio.play()
 						if not isRogue:
 							swarm.rogueAnts.append(self)
 							anim.play("owned")
@@ -191,6 +196,7 @@ func kill():
 	if queenSpawned:
 		queenHealth -= 1
 		if queenHealth <= 0:
+			audio.play()
 			owned = true
 			swarm.killRate = 0
 			swarm.engage = false
@@ -232,6 +238,7 @@ func defect():
 	swarm.battling = false
 	swarm.engage = false
 	swarm.rogueAnts.append(self)
+	audio.play()
 	
 func setFriendly():
 	for ant in ants:

@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/ant.gd" type="Script" id=1]
 [ext_resource path="res://sprites/AntSheet.png" type="Texture" id=2]
 [ext_resource path="res://sprites/AntSheet2.png" type="Texture" id=3]
 [ext_resource path="res://ant_animation2.tres" type="Animation" id=4]
+[ext_resource path="res://sounds/death.wav" type="AudioStream" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "ant_idle"
@@ -78,6 +79,7 @@ collision_mask = 4
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Area2D"]
+editor/display_folded = true
 texture = ExtResource( 2 )
 vframes = 3
 hframes = 4
@@ -90,6 +92,7 @@ anims/ant_walk = SubResource( 2 )
 anims/explode = SubResource( 3 )
 
 [node name="Enemy" type="Sprite" parent="Area2D"]
+editor/display_folded = true
 texture = ExtResource( 3 )
 vframes = 3
 hframes = 4
@@ -99,3 +102,7 @@ region_rect = Rect2( 0, 0, 16, 16 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D/Enemy"]
 anims/ant_walk = ExtResource( 4 )
 anims/explode = SubResource( 4 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Area2D"]
+stream = ExtResource( 5 )
+volume_db = -20.0
