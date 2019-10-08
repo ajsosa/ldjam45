@@ -19,7 +19,7 @@ func _ready():
 	limit_bottom = 2176
 	
 	swarm = get_parent().get_node("Swarm")
-	var player = get_parent().get_node("Swarm").get_node("Marker")
+	var player = swarm.get_node("Marker")
 	
 	target = player
 	

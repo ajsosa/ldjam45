@@ -9,7 +9,7 @@ position = Vector2( 0, -32 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 32, 0, 32, 32 )
+region_rect = Rect2( 223, 63, 32, 32 )
 
 [node name="rockUL" type="Sprite" parent="."]
 position = Vector2( 32, -32 )

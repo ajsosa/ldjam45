@@ -1,6 +1,6 @@
 extends Node
 
-var title = "Antixander the Great"
+var title = "Antexander the Great"
 
 var fullscreen = false
 
